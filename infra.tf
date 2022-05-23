@@ -6,6 +6,10 @@ resource "ionoscloud_datacenter" "dc_01" {
 }
 
 resource "ionoscloud_lan" "lan_01" {
+  depends_on = [
+    ionoscloud_datacenter.dc_01
+  ]
+
   datacenter_id = ionoscloud_datacenter.dc_01.id
   public        = false
   name          = var.lan_name
@@ -19,13 +23,20 @@ resource "ionoscloud_ipblock" "ipblock_01" {
 }
 
 resource "ionoscloud_k8s_cluster" "k8s_cluster_01" {
+  depends_on = [
+    ionoscloud_datacenter.dc_01
+  ]
+
   name        = var.k8s_name
   k8s_version = var.k8s_ver
   public      = true
 }
 
 
-resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
+resource "ionoscloud_k8s_node_pool" "k8s_node_pool_01" {
+  depends_on = [
+    ionoscloud_k8s_cluster.k8s_cluster_01
+  ]
   datacenter_id  = ionoscloud_datacenter.dc_01.id
   k8s_cluster_id = ionoscloud_k8s_cluster.k8s_cluster_01.id
   name           = var.nodepool_name
