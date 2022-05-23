@@ -1,14 +1,14 @@
-name: "Infra"
+name: "Actions-01"
 
 on:
   push:
     branches:
-      - infra
+      - main
   pull_request:
 
 jobs:
   terraform:
-    name: "Infra Actions"
+    name: "Infra"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
