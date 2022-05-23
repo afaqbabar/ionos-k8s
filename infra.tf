@@ -24,9 +24,6 @@ resource "ionoscloud_k8s_cluster" "k8s_cluster_01" {
   public      = false
 }
 
-data "ionoscloud_k8s_cluster" "k8s_cluster_01" {
-  name = "k8s_cluster_01"
-}
 
 resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
   datacenter_id  = ionoscloud_datacenter.dc_01.id
