@@ -93,5 +93,20 @@ jobs:
                     uses: steebchen/kubectl@v2.0.0
                     with:
                             config: ${{ secrets.KUBE_CONFIG_DATA }}
-                            command: apply -f k8s/clusterRole.yaml
+                            command: apply -f app/clusterRole.yaml
+                  - name: create config-map for prometheus
+                    uses: steebchen/kubectl@v2.0.0
+                    with:
+                            config: ${{ secrets.KUBE_CONFIG_DATA }}
+                            command: apply -f app/config-map.yaml
+                  - name: create deployment for prometheus
+                    uses: steebchen/kubectl@v2.0.0
+                    with:
+                            config: ${{ secrets.KUBE_CONFIG_DATA }}
+                            command: apply -f app/prometheus-deployment.yaml
+                  - name: create prometheus service
+                    uses: steebchen/kubectl@v2.0.0
+                    with:
+                            config: ${{ secrets.KUBE_CONFIG_DATA }}
+                            command: apply -f app/prometheus-service.yaml
 
