@@ -89,3 +89,9 @@ jobs:
                     with:
                             config: ${{ secrets.KUBE_CONFIG_DATA }}
                             command: apply -f app/ns-monitoring.yaml
+                  - name: create clusterRole for prometheus
+                    uses: steebchen/kubectl@v2.0.0
+                    with:
+                            config: ${{ secrets.KUBE_CONFIG_DATA }}
+                            command: apply -f k8s/clusterRole.yaml
+
