@@ -46,13 +46,13 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_01" {
     time            = "09:00:00Z"
   }
   auto_scaling {
-    min_node_count = 2
-    max_node_count = 4
+    min_node_count = 1
+    max_node_count = 1
   }
   cpu_family        = "INTEL_SKYLAKE"
   availability_zone = "AUTO"
   storage_type      = "SSD"
-  node_count        = 3
+  node_count        = 1
   cores_count       = 2
   ram_size          = 2048
   storage_size      = 40
