@@ -28,3 +28,18 @@ variable "ipblock_size" {
   description = "Size of IP block"
   default     = 6
 }
+
+variable "k8s_name" {
+  description = "Name of k8s cluster"
+  default     = "k8s_cluster_01"
+}
+
+variable "k8s_ver" {
+  description = "K8s Version"
+  default     = "1.22.8"
+}
+
+variable "nodepool_name" {
+  description = "Name of node pool"
+  default     = "k8s_nodepool_01"
+}

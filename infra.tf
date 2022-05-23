@@ -17,3 +17,52 @@ resource "ionoscloud_ipblock" "ipblock_01" {
   size     = var.ipblock_size
   name     = var.ipblock_name
 }
+
+resource "ionoscloud_k8s_cluster" "k8s_cluster_01" {
+  name        = var.k8s_name
+  k8s_version = var.k8s_ver
+  public      = false
+}
+
+data "ionoscloud_k8s_cluster" "k8s_cluster_01" {
+  name = "k8s_cluster_01"
+}
+
+resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
+  datacenter_id  = ionoscloud_datacenter.dc_01.id
+  k8s_cluster_id = ionoscloud_k8s_cluster.k8s_cluster_01.id
+  name           = var.nodepool_name
+  k8s_version    = ionoscloud_k8s_cluster.k8s_cluster_01.k8s_version
+  maintenance_window {
+    day_of_the_week = "Sunday"
+    time            = "09:00:00Z"
+  }
+  auto_scaling {
+    min_node_count = 1
+    max_node_count = 1
+  }
+  cpu_family        = "INTEL_SKYLAKE"
+  availability_zone = "AUTO"
+  storage_type      = "SSD"
+  node_count        = 1
+  cores_count       = 2
+  ram_size          = 2048
+  storage_size      = 40
+  public_ips        = [ionoscloud_ipblock.ipblock_01.ips[0], ionoscloud_ipblock.ipblock_01.ips[1]]
+
+
+}
+
+
+
+provider "kubernetes" {
+  host  = data.ionoscloud_k8s_cluster.k8s_cluster_01.config[0].clusters[0].cluster.server
+  token = data.ionoscloud_k8s_cluster.k8s_cluster_01.config[0].users[0].user.token
+  #config_path = local_file.kubeconfig.filename
+  cluster_ca_certificate = data.ionoscloud_k8s_cluster.k8s_cluster_01.ca_crt
+}
+
+resource "local_file" "kubeconfig" {
+  sensitive_content = yamlencode(jsondecode(data.ionoscloud_k8s_cluster.k8s_cluster_01.kube_config))
+  filename          = "kubeconfig.yaml"
+}
