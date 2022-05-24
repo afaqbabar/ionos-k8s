@@ -47,7 +47,7 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_01" {
   }
   auto_scaling {
     min_node_count = 1
-    max_node_count = 3
+    max_node_count = 1
   }
   cpu_family        = "INTEL_SKYLAKE"
   availability_zone = "AUTO"
