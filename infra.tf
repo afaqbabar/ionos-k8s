@@ -59,3 +59,30 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_01" {
   public_ips        = [ionoscloud_ipblock.ipblock_01.ips[0], ionoscloud_ipblock.ipblock_01.ips[1]]
 
 }
+
+resource "ionoscloud_k8s_node_pool" "k8s_node_pool_2" {
+  depends_on = [
+    ionoscloud_k8s_cluster.k8s_cluster_01
+  ]
+  datacenter_id  = ionoscloud_datacenter.dc_01.id
+  k8s_cluster_id = ionoscloud_k8s_cluster.k8s_cluster_01.id
+  name           = "k8s_nodepool_2"
+  k8s_version    = ionoscloud_k8s_cluster.k8s_cluster_01.k8s_version
+  maintenance_window {
+    day_of_the_week = "Sunday"
+    time            = "09:00:00Z"
+  }
+  auto_scaling {
+    min_node_count = 2
+    max_node_count = 3
+  }
+  cpu_family        = "INTEL_SKYLAKE"
+  availability_zone = "AUTO"
+  storage_type      = "SSD"
+  node_count        = 2
+  cores_count       = 4
+  ram_size          = 4096
+  storage_size      = 40
+  public_ips        = [ionoscloud_ipblock.ipblock_01.ips[2], ionoscloud_ipblock.ipblock_01.ips[3], ionoscloud_ipblock.ipblock_01.ips[4]]
+
+}
