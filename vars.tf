@@ -26,7 +26,7 @@ variable "ipblock_name" {
 
 variable "ipblock_size" {
   description = "Size of IP block"
-  default     = 3
+  default     = 6
 }
 
 variable "k8s_name" {
