@@ -60,13 +60,13 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_01" {
 
 }
 
-resource "ionoscloud_k8s_node_pool" "k8s_node_pool_2" {
+resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
   depends_on = [
     ionoscloud_k8s_cluster.k8s_cluster_01
   ]
   datacenter_id  = ionoscloud_datacenter.dc_01.id
   k8s_cluster_id = ionoscloud_k8s_cluster.k8s_cluster_01.id
-  name           = "k8s_nodepool_2"
+  name           = "k8s_nodepool_02"
   k8s_version    = ionoscloud_k8s_cluster.k8s_cluster_01.k8s_version
   maintenance_window {
     day_of_the_week = "Sunday"
@@ -74,7 +74,7 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_2" {
   }
   auto_scaling {
     min_node_count = 2
-    max_node_count = 3
+    max_node_count = 2
   }
   cpu_family        = "INTEL_SKYLAKE"
   availability_zone = "AUTO"
