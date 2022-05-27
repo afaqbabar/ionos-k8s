@@ -4,7 +4,7 @@ resource "ionoscloud_datacenter" "dc_01" {
   description         = var.dc_description
   sec_auth_protection = false
 }
-/*
+
 resource "ionoscloud_lan" "lan_01" {
   depends_on = [
     ionoscloud_datacenter.dc_01
