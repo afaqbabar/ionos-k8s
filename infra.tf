@@ -74,7 +74,7 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
   }
   auto_scaling {
     min_node_count = 2
-    max_node_count = 2
+    max_node_count = 3
   }
   cpu_family        = "INTEL_SKYLAKE"
   availability_zone = "AUTO"
@@ -86,4 +86,4 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
   public_ips        = [ionoscloud_ipblock.ipblock_01.ips[2], ionoscloud_ipblock.ipblock_01.ips[3], ionoscloud_ipblock.ipblock_01.ips[4]]
 
 }
-*/
+
