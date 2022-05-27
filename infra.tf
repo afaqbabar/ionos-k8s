@@ -4,7 +4,7 @@ resource "ionoscloud_datacenter" "dc_01" {
   description         = var.dc_description
   sec_auth_protection = false
 }
-
+/*
 resource "ionoscloud_lan" "lan_01" {
   depends_on = [
     ionoscloud_datacenter.dc_01
@@ -86,3 +86,4 @@ resource "ionoscloud_k8s_node_pool" "k8s_node_pool_02" {
   public_ips        = [ionoscloud_ipblock.ipblock_01.ips[2], ionoscloud_ipblock.ipblock_01.ips[3], ionoscloud_ipblock.ipblock_01.ips[4]]
 
 }
+*/
